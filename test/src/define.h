@@ -55,4 +55,11 @@ string get_lenchecksum(string data);
 void fileCopy(string filePath);
 void sigdemo(int sig);
 
+
+void printArray(int *a,int len);
+//快速排序
+void quickSort1(int *a,int start,int end);
+void insertSort(int *a, int len);
+void selectSort(int *a,int len);
+
 #endif /* DEFINE_H_ */
