@@ -1,13 +1,12 @@
 /*
- * example.h
+ * example.cpp
  *
  *  Created on: 2018年2月13日
  *      Author: root
  */
 
-#ifndef EXAMPLE_H_
-#define EXAMPLE_H_
 
+#include "define.h"
 #include <sys/types.h>          /* See NOTES */
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -33,37 +32,6 @@ public:
 void printValue(char c)
 {
 	cout<<c<<endl;
-}
-
-int openServer(const unsigned short &port)
-{
-	int fd = socket(AF_INET, SOCK_STREAM, 0);
-	if(-1 == fd){
-		perror("socket");
-		return -1;
-	}
-
-	int opt = SO_REUSEADDR;
-	if(setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))!= 0){
-		perror("setsockopt");
-		return -1;
-	}
-
-	struct sockaddr_in addr;
-	addr.sin_family = AF_INET;
-	addr.sin_addr.s_addr = INADDR_ANY;
-	addr.sin_port = htons(port);
-	if(-1 == bind(fd, (struct sockaddr *)&addr, sizeof(struct sockaddr)))
-	{
-		perror("bind");
-		return -1;
-	}
-	if(listen(fd, 24) == -1){
-		perror("listen");
-		return -1;
-	}
-	cout<<"ftp server started, listen port "<<port<<endl;
-	return fd;
 }
 
 int setnonblocking(int fd)
@@ -136,4 +104,3 @@ void epollTest()
 	}
 }
 
-#endif /* EXAMPLE_H_ */

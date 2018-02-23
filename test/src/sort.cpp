@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "define.h"
 
-void printArray(int *a,int len)
+inline void printArray(int *a,int len)
 {
 	int i;
 	for(i=0;i<len;i++){
@@ -11,7 +11,7 @@ void printArray(int *a,int len)
 }
 
 //快速排序
-void quickSort1(int *a,int start,int end)
+void quickSort(int *a,int start,int end)
 {
 	printArray(a, end-start+1);
 	if(start >= end){
@@ -38,8 +38,43 @@ void quickSort1(int *a,int start,int end)
 	}
 	a[low] = key;
 	printArray(a, 5);
-	quickSort1(a, start, low-1);
-	quickSort1(a, low+1, end);
+	quickSort(a, start, low-1);
+	quickSort(a, low+1, end);
+}
+
+inline void swap(int &n1, int &n2)
+{
+	int temp = n1;
+	n1 = n2;
+	n2 = temp;
+}
+
+void quickSort(int *a, int len)
+{
+	printArray(a, len);
+	if(len < 2){
+		return ;
+	}
+	int iLeft = 0;
+	int iRight = len - 1;
+	int keyVal = a[0];
+	while(iLeft < iRight){
+		while(iLeft < iRight && keyVal < a[iRight]){
+			iRight--;
+		}
+		swap(a[iLeft], a[iRight]);
+		cout<<"iLeft = "<<iLeft<<" iRight = "<<iRight<<endl;
+		printArray(a, len);
+		while(iLeft < iRight && keyVal > a[iLeft]){
+			iLeft++;
+		}
+		swap(a[iLeft], a[iRight]);
+		cout<<"iLeft = "<<iLeft<<" iRight = "<<iRight<<endl;
+		printArray(a, len);
+	}
+
+	quickSort(a, iLeft);
+	quickSort(a + iLeft + 1, len - iLeft -1);
 }
 
 
