@@ -15,9 +15,9 @@
 int main() {
 
 //	epollTest();
-	int a[] = {3,2,1,4,5};
+	int a[] = {5,4,3,2,1};
 	quickSort1(a, 0, 4);
-	printArray(a, 5);
+//	printArray(a, 5);
 
 	return 0;
 }

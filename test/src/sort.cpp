@@ -13,6 +13,7 @@ void printArray(int *a,int len)
 //快速排序
 void quickSort1(int *a,int start,int end)
 {
+	printArray(a, end-start+1);
 	if(start >= end){
 		return ;
 	}
@@ -26,12 +27,17 @@ void quickSort1(int *a,int start,int end)
 			high--;
 		}
 		a[low] = a[high];
+		cout<<"low = "<<low<<" high = "<<high<<endl;
+		printArray(a, 5);
 		while(low < high && a[low] < key){
 			low++;
 		}
 		a[high] = a[low];
+		cout<<"low = "<<low<<" high = "<<high<<endl;
+		printArray(a, 5);
 	}
 	a[low] = key;
+	printArray(a, 5);
 	quickSort1(a, start, low-1);
 	quickSort1(a, low+1, end);
 }
